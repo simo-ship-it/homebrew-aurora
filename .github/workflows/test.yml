@@ -17,7 +17,9 @@ jobs:
       - uses: actions/checkout@v5
 
       - name: Tap the checked-out formula
-        run: brew tap simo-ship-it/aurora "$GITHUB_WORKSPACE"
+        run: |
+          brew tap simo-ship-it/aurora "$GITHUB_WORKSPACE"
+          brew trust --formula simo-ship-it/aurora/aurora
 
       - name: Audit
         run: brew audit --strict --online simo-ship-it/aurora/aurora
