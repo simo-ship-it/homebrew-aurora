@@ -1,0 +1,31 @@
+name: Homebrew
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  install:
+    runs-on: macos-15
+    env:
+      HOMEBREW_NO_AUTO_UPDATE: "1"
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Tap the checked-out formula
+        run: brew tap simo-ship-it/aurora "$GITHUB_WORKSPACE"
+
+      - name: Audit
+        run: brew audit --strict --online simo-ship-it/aurora/aurora
+
+      - name: Build and install
+        run: brew install --build-from-source simo-ship-it/aurora/aurora
+
+      - name: Test installed app
+        run: |
+          brew test simo-ship-it/aurora/aurora
+          codesign --verify --strict --verbose=2 "$(brew --prefix aurora)/Aurora.app"

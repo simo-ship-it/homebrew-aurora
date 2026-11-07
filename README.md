@@ -7,6 +7,13 @@ macOS that shows text formatted while you write it.
 brew install simo-ship-it/aurora/aurora
 ```
 
+To update an existing installation:
+
+```bash
+brew update
+brew upgrade simo-ship-it/aurora/aurora
+```
+
 This is a **formula**, not a cask: it fetches the source and builds Aurora on
 your own machine. Aurora is not signed with an Apple Developer ID, so a
 downloaded copy would be quarantined by macOS and refused at first launch —
@@ -18,3 +25,5 @@ To build straight from `main` instead of the latest release:
 ```bash
 brew install --HEAD simo-ship-it/aurora/aurora
 ```
+
+Every update is audited, built from source and tested on a clean macOS runner.
